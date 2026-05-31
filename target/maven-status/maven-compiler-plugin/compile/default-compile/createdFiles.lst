@@ -1,5 +1,4 @@
 com\project\entity\Libro.class
-com\project\controller\hola.class
 com\project\controller\LibroController.class
 com\project\repository\PrestamoRepository.class
 com\project\controller\PrestamoController.class
