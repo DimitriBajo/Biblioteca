@@ -17,7 +17,8 @@ public class Libro {
 
     private boolean disponible = true;
 
-    public Libro() {}
+    public Libro() {
+    }
 
     public Libro(String titulo, String autor, String isbn, boolean disponible) {
         this.titulo = titulo;
@@ -26,47 +27,47 @@ public class Libro {
         this.disponible = disponible;
     }
 
-    public Long getId(){
+    public Long getId() {
         return id;
     }
 
-    protected void setId(Long id){
+    protected void setId(Long id) {
         this.id = id;
     }
 
-    public String getTitulo(){
+    public String getTitulo() {
         return titulo;
     }
 
-    public void setTitulo(String titulo){
+    public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
 
-    public String getAutor(){
+    public String getAutor() {
         return autor;
     }
 
-    public void setAutor(String autor){
+    public void setAutor(String autor) {
         this.autor = autor;
     }
 
-    public String getIsbn(){
+    public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(String isbn){
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
-    public boolean getDisponible(){
+    public boolean getDisponible() {
         return disponible;
     }
 
-    public void prestar(){
+    public void prestar() {
         this.disponible = false;
     }
 
-    public void devolver(){
+    public void devolver() {
         this.disponible = true;
     }
 }
