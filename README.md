@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Biblioteca API REST
 
 API REST desarrollada con Java, Spring Boot, Hibernate y MySQL para la gestión de una biblioteca.
