@@ -25,10 +25,7 @@ public class Prestamo {
     public Prestamo() {
     }
 
-    public Prestamo(LocalDate fechaPrestamo,
-                    LocalDate fechaDevolucion,
-                    Usuario usuario,
-                    Libro libro) {
+    public Prestamo(LocalDate fechaPrestamo, LocalDate fechaDevolucion, Usuario usuario, Libro libro) {
 
         this.fechaPrestamo = fechaPrestamo;
         this.fechaDevolucion = fechaDevolucion;
