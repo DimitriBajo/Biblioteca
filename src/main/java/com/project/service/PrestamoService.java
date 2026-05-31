@@ -15,7 +15,7 @@ public class PrestamoService {
     private final LibroRepository libroRepository;
 
     public PrestamoService(PrestamoRepository prestamoRepository,
-                           LibroRepository libroRepository) {
+            LibroRepository libroRepository) {
 
         this.prestamoRepository = prestamoRepository;
         this.libroRepository = libroRepository;
@@ -27,13 +27,17 @@ public class PrestamoService {
 
     public Prestamo crearPrestamo(Prestamo prestamo) {
 
-        Libro libro = prestamo.getLibro();
+        Libro libro = libroRepository
+                .findById(prestamo.getLibro().getId())
+                .orElseThrow(() -> new RuntimeException("Libro no encontrado"));
 
         if (!libro.getDisponible()) {
             throw new RuntimeException("El libro ya está prestado");
         }
 
         libro.prestar();
+
+        prestamo.setLibro(libro);
 
         libroRepository.save(libro);
 
