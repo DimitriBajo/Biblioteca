@@ -7,6 +7,7 @@ import com.project.repository.PrestamoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.time.LocalDate;
 
 @Service
 public class PrestamoService {
@@ -38,6 +39,22 @@ public class PrestamoService {
         libro.prestar();
 
         prestamo.setLibro(libro);
+
+        libroRepository.save(libro);
+
+        return prestamoRepository.save(prestamo);
+    }
+
+    public Prestamo devolverPrestamo(Long id) {
+        Prestamo prestamo = prestamoRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("Prestamo no encontrado"));
+
+        Libro libro = prestamo.getLibro();
+
+        libro.devolver();
+
+        prestamo.setFechaDevolucion(LocalDate.now());
 
         libroRepository.save(libro);
 

@@ -2,32 +2,33 @@
 target/
 !.mvn/wrapper/maven-wrapper.jar
 
-# IntelliJ IDEA
+# Java
+*.class
+
+# Logs
+*.log
+
+# IDE IntelliJ
 .idea/
 *.iml
+
+# VS Code
+.vscode/
 
 # Eclipse
 .project
 .classpath
 .settings/
 
-# VS Code
-.vscode/
+# NetBeans
+nbproject/private/
+build/
+dist/
 
-# Logs
-*.log
-
-# OS
+# Sistema operativo
 .DS_Store
 Thumbs.db
 
-# Java
-*.class
-
-# Application properties sensibles
-application-local.properties
-application-prod.properties
-
 # Archivos temporales
 *.tmp
-*.swp
+*.swp-r --

@@ -26,8 +26,15 @@ public class PrestamoController {
         return prestamoService.crearPrestamo(prestamo);
     }
 
+    @PutMapping("/{id}/devolver")
+    public Prestamo devolverPrestamo(@PathVariable Long id) {
+        return prestamoService.devolverPrestamo(id);
+    }
+    
     @DeleteMapping("/{id}")
     public void eliminarPrestamo(@PathVariable Long id) {
         prestamoService.eliminar(id);
     }
+
+    
 }
