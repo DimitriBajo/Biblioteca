@@ -30,6 +30,10 @@ public class PrestamoService {
         return prestamoRepository.findByFechaDevolucionIsNull();
     }
 
+    public List<Prestamo> obtenerPrestamosPorUsuario(Long usuarioId) {
+        return prestamoRepository.findByUsuarioId(usuarioId);
+    }
+
     public Prestamo crearPrestamo(Prestamo prestamo) {
 
         Libro libro = libroRepository
