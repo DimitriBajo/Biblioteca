@@ -26,6 +26,10 @@ public class PrestamoService {
         return prestamoRepository.findAll();
     }
 
+    public List<Prestamo> obtenerPrestamosActivos() {
+        return prestamoRepository.findByFechaDevolucionIsNull();
+    }
+
     public Prestamo crearPrestamo(Prestamo prestamo) {
 
         Libro libro = libroRepository
@@ -64,4 +68,5 @@ public class PrestamoService {
     public void eliminar(Long id) {
         prestamoRepository.deleteById(id);
     }
+
 }

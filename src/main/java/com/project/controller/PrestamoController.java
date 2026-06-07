@@ -21,6 +21,11 @@ public class PrestamoController {
         return prestamoService.obtenerTodos();
     }
 
+    @GetMapping("/activos")
+    public List<Prestamo> obtenerPrestamosActivos() {
+        return prestamoService.obtenerPrestamosActivos();
+    }
+
     @PostMapping
     public Prestamo crearPrestamo(@RequestBody Prestamo prestamo) {
         return prestamoService.crearPrestamo(prestamo);
