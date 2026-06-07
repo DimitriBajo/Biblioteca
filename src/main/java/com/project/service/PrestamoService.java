@@ -5,6 +5,8 @@ import com.project.entity.Prestamo;
 import com.project.repository.LibroRepository;
 import com.project.repository.PrestamoRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.time.LocalDate;
@@ -38,10 +40,9 @@ public class PrestamoService {
 
         Libro libro = libroRepository
                 .findById(prestamo.getLibro().getId())
-                .orElseThrow(() -> new RuntimeException("Libro no encontrado"));
-
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Libro no encontrado"));
         if (!libro.getDisponible()) {
-            throw new RuntimeException("El libro ya está prestado");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El libro ya esta prestado");
         }
 
         libro.prestar();
@@ -54,9 +55,10 @@ public class PrestamoService {
     }
 
     public Prestamo devolverPrestamo(Long id) {
+
         Prestamo prestamo = prestamoRepository
                 .findById(id)
-                .orElseThrow(() -> new RuntimeException("Prestamo no encontrado"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Prestamo no encontrado"));
 
         Libro libro = prestamo.getLibro();
 
