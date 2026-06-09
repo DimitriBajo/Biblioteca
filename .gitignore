@@ -31,4 +31,8 @@ Thumbs.db
 
 # Archivos temporales
 *.tmp
-*.swp-r --
+*.swp
+
+# Configuracion local con credenciales
+.env
+application-local.properties

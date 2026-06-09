@@ -106,19 +106,18 @@ Crear la base de datos:
 CREATE DATABASE biblioteca;
 ```
 
-Configurar las credenciales en:
+Configurar las credenciales con variables de entorno:
 
-```properties
-src/main/resources/application.properties
+```powershell
+$env:DB_USERNAME="root"
+$env:DB_PASSWORD="TU_PASSWORD"
 ```
 
-```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/biblioteca
-spring.datasource.username=root
-spring.datasource.password=TU_PASSWORD
+La aplicacion lee estas variables desde:
 
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
+```properties
+spring.datasource.username=${DB_USERNAME:root}
+spring.datasource.password=${DB_PASSWORD:}
 ```
 
 ## Ejecución
