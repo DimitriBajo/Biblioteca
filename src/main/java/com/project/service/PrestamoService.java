@@ -4,6 +4,9 @@ import com.project.entity.Libro;
 import com.project.entity.Prestamo;
 import com.project.repository.LibroRepository;
 import com.project.repository.PrestamoRepository;
+import com.project.dto.CrearPrestamoDTO;
+import com.project.entity.Usuario;
+import com.project.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
@@ -16,12 +19,14 @@ public class PrestamoService {
 
     private final PrestamoRepository prestamoRepository;
     private final LibroRepository libroRepository;
+    private final UsuarioRepository usuarioRepository;
 
     public PrestamoService(PrestamoRepository prestamoRepository,
-            LibroRepository libroRepository) {
+            LibroRepository libroRepository, UsuarioRepository usuarioRepository) {
 
         this.prestamoRepository = prestamoRepository;
         this.libroRepository = libroRepository;
+        this.usuarioRepository = usuarioRepository;
     }
 
     public List<Prestamo> obtenerTodos() {
@@ -36,18 +41,27 @@ public class PrestamoService {
         return prestamoRepository.findByUsuarioId(usuarioId);
     }
 
-    public Prestamo crearPrestamo(Prestamo prestamo) {
+    public Prestamo crearPrestamo(CrearPrestamoDTO crearPrestamoDTO) {
+
+        Usuario usuario = usuarioRepository
+                .findById(crearPrestamoDTO.getUsuarioId())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
 
         Libro libro = libroRepository
-                .findById(prestamo.getLibro().getId())
+                .findById(crearPrestamoDTO.getLibroId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Libro no encontrado"));
+
         if (!libro.getDisponible()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El libro ya esta prestado");
         }
 
-        libro.prestar();
+        Prestamo prestamo = new Prestamo();
 
+        prestamo.setUsuario(usuario);
         prestamo.setLibro(libro);
+        prestamo.setFechaPrestamo(LocalDate.now());
+
+        libro.prestar();
 
         libroRepository.save(libro);
 

@@ -2,6 +2,7 @@ package com.project.controller;
 
 import com.project.entity.Prestamo;
 import com.project.service.PrestamoService;
+import com.project.dto.CrearPrestamoDTO;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,8 +28,8 @@ public class PrestamoController {
     }
 
     @PostMapping
-    public Prestamo crearPrestamo(@RequestBody Prestamo prestamo) {
-        return prestamoService.crearPrestamo(prestamo);
+    public Prestamo crearPrestamo(@RequestBody CrearPrestamoDTO crearPrestamoDTO) {
+        return prestamoService.crearPrestamo(crearPrestamoDTO);
     }
 
     @PutMapping("/{id}/devolver")
